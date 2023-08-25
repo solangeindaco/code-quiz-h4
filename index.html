@@ -4,11 +4,43 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta http-equiv="X-UA-Compatible" content="ie=edge" />
-    <title>Password Generator</title>
+    <title>Code Quiz</title>
     <!--Reset.css file it is added to clear the browser's default formatting of HTML elements, removing potential inconsistencies between different browsers-->
     <link rel="stylesheet" type="text/css" href="./assets/css/reset.css" />
     <link rel="stylesheet" href="./assets/css/style.css" />
   </head>
   <body>
+    <header>
+      <p>View Highscores</p>
+      <p>Time: <span id="time">0</span></p>
+    </header>
+    <main>
+
+      <section id="start-game">
+        <h1>Coding Quiz Challenge</h1>
+        <p>
+          Try answer the following code-related questions within the time 
+          limit. Keep in mind that incorrect answer will penalize your scoretime 
+          by ten seconds
+        </p>
+        <button i="start-game">Start Quiz</button>
+      </section>
+
+      <section id="question">
+        <h2></h2>
+        <ul>
+          <li><button class="answer"></button></li>
+          <li><button class="answer"></button></li>
+          <li><button class="answer"></button></li>
+          <li><button class="answer"></button></li>
+        </ul>
+      </section>
+
+      <section id="final-score">
+        <h2>All done!</h2>
+      </section>
+
+    </main>
+    <script src="./assets/js/script.js"></script>
   </body>
 </html>
