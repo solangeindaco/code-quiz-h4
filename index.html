@@ -11,19 +11,19 @@
   </head>
   <body>
     <header>
-      <p>View Highscores</p>
+      <a href="./highscores.html">View Highscores</a>
       <p>Time: <span id="time">0</span></p>
     </header>
     <main>
 
-      <section id="start-game">
+      <section id="start-quiz">
         <h1>Coding Quiz Challenge</h1>
         <p>
           Try answer the following code-related questions within the time 
           limit. Keep in mind that incorrect answer will penalize your scoretime 
           by ten seconds
         </p>
-        <button i="start-game">Start Quiz</button>
+        <button id="start-quiz">Start Quiz</button>
       </section>
 
       <section id="question">
@@ -38,6 +38,12 @@
 
       <section id="final-score">
         <h2>All done!</h2>
+        <p>Your final score is <span id="score"></span>.</p>
+        <form id="form">
+          <textarea>Enter initials: </textarea>
+          <input type="text" id="inicials"/>
+          <button id="submit">Submit</button>
+        </form>
       </section>
 
     </main>

@@ -1,6 +1,15 @@
 header {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 1%;f;
-  }
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1%;
+}
+
+#question {
+  display: none;
+}
+
+#final-score {
+  display: none;
+}
+
