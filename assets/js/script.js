@@ -15,6 +15,20 @@ const correctAnswers =[3,2,3];
 
 var questionNumber;
 
+
+function saveInitials(){
+    let initialsInput = document.querySelector("#initials"); 
+    let initialText = initialsInput.value.trim();
+    localStorage.set
+}
+
+function showFinalScore(){
+    //hide question section
+    question.style.display = "none";
+    //show final score section
+    finalScore.style.display = "block";
+}
+
 function showResponse(){
     const response= document.querySelector("#response");
     response.textContent ="Correct";
@@ -38,7 +52,12 @@ function renderQuestion(questionNumber){
             let button = event.target;
             console.log(button.getAttribute("data-answer-index"));
             showResponse();
-            renderQuestion(++questionNumber);
+            let nextQuestion = ++questionNumber;
+            if (nextQuestion < questions.length){
+                renderQuestion(nextQuestion);
+            }else{
+                showFinalScore();
+            }
         });
         ++answersIndex;
     });
