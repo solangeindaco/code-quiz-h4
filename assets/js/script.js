@@ -125,11 +125,11 @@ function renderHighscores() {
     var highscoresList = JSON.parse(localStorage.getItem('highscores'));
     // Check if data is returned, if not exit out of the function
     if (highscoresList !== null) {
-      let scoresListEl = document.querySelector("#highscores");
+      var scoresListEl = document.querySelector("#highscores");
       highscoresList.forEach(scoreElement =>  {
         let scoreRow = document.createElement('li');
         scoreRow.textContent = scoreElement.score;
-        scoresListEl.appendChild(document.createElement('li'))
+        scoresListEl.appendChild(scoreRow);
       });
     }
   }
@@ -168,10 +168,13 @@ function saveScore() {
 
 //This function is called when user click on the "clear Highscores" button on the highscores page
 function clearHighscores(){
+    localStorage.removeItem('highscores');
+    var scoresListEl = document.querySelector("#highscores");
+    scoresListEl.innerHTML="";
 }
 
 function init(){
-    console.log (location.pathname)
+    //Check the pathname to know where the user is in
     if (location.pathname == '/index.html'){
         renderPresentation();
     } else {
