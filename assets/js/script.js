@@ -19,7 +19,17 @@ var questionNumber;
 function saveInitials(){
     let initialsInput = document.querySelector("#initials"); 
     let initialText = initialsInput.value.trim();
-    localStorage.set
+    var newScore = {
+        initials: initialText,
+        score: 7
+    };
+    let highscoresList = JSON.parse(localStorage.getItem("highscores"));
+    if (highscoresList == null){
+        highscoresList = [];
+    }
+    highscoresList.push(newScore);
+    localStorage.setItem("highscores", JSON.stringify(highscoresList));
+    goToHighscoresPage();
 }
 
 function showFinalScore(){
@@ -109,43 +119,31 @@ function renderFinalScore(){
     finalScore.style.display ="block";
 }
 
-/*
 
-function renderPresentation(){
-    mainPresentation.setAttribute("style", "display : block");
-    question.setAttribute("style", "display : none");
-    startQuizBtn.addEventListener("click", function(){
-        //hide main presentation section
-        mainPresentation.style.display = "none";
-        //show question section
-        question.style.display = "block";
-    });
-    /*
-    let mainTitle = document.createElement("h1");
-    mainTitle.textContent = "Coding Quiz Challenge";
-    mainTitle.setAttribute("style", "text-align: center");
-    mainPresentation.appendChild(mainTitle);
-    let description = document.createElement("p");
-    description.textContent = "Try answer the following code-related questions within the time limit. Keep in mind that incorrect answer will penalize your scoretime by ten seconds.";
-    description.setAttribute("style", "text-align: center");
-    mainPresentation.appendChild(description);
-    let startQuizBtn = document.createElement("button");
-    startQuizBtn.textContent = "Start Quiz";
-    startQuizBtn.addEventListener("click", function(){
-        //hide main presentation section
-        mainPresentation.setAttribute("display","none");
-        //show question section
-        question.setAttribute("display","block");
-    });
-    mainPresentation.appendChild(startQuizBtn);
-    
-} */
+function renderHighscores() {
+    // Use JSON.parse() to convert text to JavaScript object
+    var highscoresList = JSON.parse(localStorage.getItem('highscores'));
+    // Check if data is returned, if not exit out of the function
+    if (highscoresList !== null) {
+      let scoresListEl = document.querySelector("#highscores");
+      highscoresList.forEach(scoreElement =>  {
+        let scoreRow = document.createElement('li');
+        scoreRow.textContent = scoreElement.score;
+        scoresListEl.appendChild(document.createElement('li'))
+      });
+    }
+  }
+
+//This function is called when user click on the "goBack" button on the highscores page
+function goToHighscoresPage(){
+    // The location.href is change to navigate to the index page
+    location.href = "./highscores.html";
+}
 
 //This function is called when user click on the "goBack" button on the highscores page
 function goToMainPage(){
     // The location.href is change to navigate to the index page
     location.href = "./index.html";
-    renderPresentation;
 }
 
 function saveScore() {
@@ -157,19 +155,6 @@ function saveScore() {
     };
     // Use .setItem() to store object in storage and JSON.stringify to convert it as a string
     localStorage.setItem('playerScore', JSON.stringify(playerScore));
-    */
-  }
-  
-  function renderHighscores() {
-    /*
-    // Use JSON.parse() to convert text to JavaScript object
-    var lastGrade = JSON.parse(localStorage.getItem('studentGrade'));
-    // Check if data is returned, if not exit out of the function
-    if (lastGrade !== null) {
-      document.getElementById('saved-name').innerHTML = lastGrade.student;
-      document.getElementById('saved-grade').innerHTML = lastGrade.grade;
-      document.getElementById('saved-comment').innerHTML = lastGrade.comment;
-    }
     */
   }
   
@@ -186,7 +171,13 @@ function clearHighscores(){
 }
 
 function init(){
-    renderPresentation();
+    console.log (location.pathname)
+    if (location.pathname == '/index.html'){
+        renderPresentation();
+    } else {
+        // (location.pathname == '/highscores.html')
+        renderHighscores();
+    }
 }
 
 init();
