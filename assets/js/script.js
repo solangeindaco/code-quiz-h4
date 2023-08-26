@@ -2,6 +2,7 @@
 const mainPresentation = document.querySelector("#main-presentation");
 const question = document.querySelector("#question");
 const startQuizBtn = document.querySelector("#start-quiz");
+const possibleAnswersList = document.querySelector("#possible-answers");
 const finalScore = document.querySelector("#final-score");
 const questions = ["Commonly used data types DO NOT include: ", 
                    "The condition enclosed in a if/else statement is enclosed within ____.",
@@ -14,9 +15,34 @@ const correctAnswers =[3,2,3];
 
 var questionNumber;
 
+function showResponse(){
+    const response= document.querySelector("#response");
+    response.textContent ="Correct";
+}
+
 function renderQuestion(questionNumber){
     const questionTitle = document.querySelector("#question-title");
+    // Display the question on the page
     questionTitle.textContent = questions[questionNumber];
+    // Get the possible answers for the question
+    let answers = possibleAnswers[questionNumber];
+    //possibleAnswersList.innerHTML = "";
+    let answersBtnsList = document.querySelectorAll(".answers");
+    console.log(answersBtnsList);
+
+    let answersIndex = 0;
+    answersBtnsList.forEach(function(button){
+        button.textContent = answers[answersIndex];
+        button.setAttribute("data-answer-index", answersIndex);
+        button.addEventListener("click", function(event) {
+            let button = event.target;
+            console.log(button.getAttribute("data-answer-index"));
+            showResponse();
+            renderQuestion(++questionNumber);
+        });
+        ++answersIndex;
+    });
+
     /*
     let answers = possibleAnswers[questionNumber];
     let possibleAnswersList = question.getElementsByTagName("ul");
