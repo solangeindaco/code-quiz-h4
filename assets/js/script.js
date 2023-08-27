@@ -13,8 +13,8 @@ const possibleAnswers =[["strings","booleans","alerts","numbers"],
                 ["number and string","others arrays","booleans","all of the above"]];
 
 const correctAnswers =[3,2,3];
-// 10 minutes is the duration of the quiz: 10x60milliseconds = 600
-const quizDuration = 600; 
+// 5 minutes is the duration of the quiz: 10x60milliseconds = 600
+const quizDuration = 300; 
 
 var questionNumber;
 var timerCount;
@@ -26,7 +26,7 @@ function saveInitials(){
     let initialText = initialsInput.value.trim();
     var newScore = {
         initials: initialText,
-        score: 7
+        score: timerCount
     };
     let highscoresList = JSON.parse(localStorage.getItem("highscores"));
     if (highscoresList == null){
@@ -42,6 +42,7 @@ function showFinalScore(){
     question.style.display = "none";
     //show final score section
     finalScore.style.display = "block";
+    
 }
 
 function showResponse(){
@@ -49,15 +50,13 @@ function showResponse(){
     response.textContent ="Correct";
 }
 
-function renderQuestion(questionNumber){
+function renderQuestion(){
     const questionTitle = document.querySelector("#question-title");
     // Display the question on the page
     questionTitle.textContent = questions[questionNumber];
     // Get the possible answers for the question
     let answers = possibleAnswers[questionNumber];
-    //possibleAnswersList.innerHTML = "";
     let answersBtnsList = document.querySelectorAll(".answers");
-    console.log(answersBtnsList);
 
     let answersIndex = 0;
     answersBtnsList.forEach(function(button){
@@ -67,11 +66,13 @@ function renderQuestion(questionNumber){
             let button = event.target;
             console.log(button.getAttribute("data-answer-index"));
             showResponse();
-            let nextQuestion = ++questionNumber;
-            if (nextQuestion < questions.length){
-                renderQuestion(nextQuestion);
+            questionNumber++;
+            if (questionNumber < questions.length){
+                renderQuestion();
             }else{
+                console.log(questionNumber);
                 showFinalScore();
+                stopTimer();
             }
         });
         ++answersIndex;
@@ -85,8 +86,7 @@ function startQuiz(){
     //show question section
     question.style.display = "block";
     questionNumber = 0;
-    timerCount = quizDuration;
-    renderQuestion(questionNumber);
+    renderQuestion();
     startTimer();
 };
 
@@ -97,8 +97,8 @@ function renderPresentation(){
     question.style.display = "none";
     //hide final score section
     finalScore.style.display ="none";
-    timer = 0;
-    timerEl
+    timerCount = quizDuration;
+    timerEl.textContent = timerCount;
 }
 
 function renderFinalScore(){
@@ -143,24 +143,24 @@ function clearHighscores(){
     scoresListEl.innerHTML="";
 }
 
+function quizFinnished(){
+    return (questionNumber == questions.length);
+}
+
+function stopTimer(){
+    // Clears interval and stops timer
+    clearInterval(timer);
+}
+
 // The setTimer function starts and stops the timer and triggers winGame() and loseGame()
 function startTimer() {
     // Sets timer
     timer = setInterval(function() {
       timerCount--;
       timerEl.textContent = timerCount;
-      if (timerCount >= 0) {
-        // Tests if win condition is met
-        if (quizFinnished() && timerCount > 0) {
-          // Clears interval and stops timer
-          clearInterval(timer);
-          winGame();
-        }
-      }
       // Tests if time has run out
-      if (timerCount === 0) {
-        // Clears interval
-        clearInterval(timer);
+      if (timerCount === 0){ 
+        stopTimer();
         renderFinalScore();
       }
     }, 1000);
