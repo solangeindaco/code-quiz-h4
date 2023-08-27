@@ -1,7 +1,7 @@
 // Access element by ID using .querySelector()
 const timerEl = document.querySelector("#timer");
 const mainPresentation = document.querySelector("#main-presentation");
-const question = document.querySelector("#question");
+const questionEl = document.querySelector("#question");
 const startQuizBtn = document.querySelector("#start-quiz");
 const possibleAnswersList = document.querySelector("#possible-answers");
 const finalScore = document.querySelector("#final-score");
@@ -12,13 +12,30 @@ const possibleAnswers =[["strings","booleans","alerts","numbers"],
                 ["quotes","curly brackets","parentheses","square brackets"],
                 ["number and string","others arrays","booleans","all of the above"]];
 
-const correctAnswers =[3,2,3];
+const correctAnswers =["alerts","parentheses","all of the above"];
 // 5 minutes is the duration of the quiz: 10x60milliseconds = 600
 const quizDuration = 300; 
 
 var timerCount;
 var timer;
+var questionsList = [];
 
+class Question {
+    constructor(questionText, answerChoices, correctAnswer) {
+        this.questionText = questionText;
+        this.answerChoices = answerChoices;
+        this.correctAnswer = correctAnswer;
+    }
+    isCorrectAnswer(answerIndex) {
+        return this.correctAnswer == this.answerChoices[answerIndex];
+    }
+}
+
+function fillQuestionsList(){
+    for (i=0; i< questions.length;i++){
+        questionsList.push(new Question(questions[i],possibleAnswers[i], correctAnswers[i]));
+    }
+}
 
 function saveInitials(){
     let initialsInput = document.querySelector("#initials"); 
@@ -38,35 +55,42 @@ function saveInitials(){
 
 function showFinalScore(){
     //hide question section
-    question.style.display = "none";
+    questionEl.style.display = "none";
     //show final score section
     finalScore.style.display = "block";
     
 }
 
-function showResponse(){
+function showResponse(correct){
     const response= document.querySelector("#response");
-    response.textContent ="Correct";
+    response.innerHTML="";
+    if (correct){
+        response.textContent ="Correct";
+    }else{
+        response.textContent ="Wrong";
+    } 
 }
 
 function renderQuestion(questionNumber){
     const questionTitle = document.querySelector("#question-title");
     // Display the question on the page
-    questionTitle.textContent = questions[questionNumber];
+    let currentQuestion = questionsList[questionNumber];
+    console.log(currentQuestion);
+    questionTitle.textContent = currentQuestion.questionText;
     // Get the possible answers for the question
-    let answers = possibleAnswers[questionNumber];
+    let answers = currentQuestion.answerChoices;
     let answersBtnsList = document.querySelectorAll(".answers");
 
     let answersIndex = 0;
     answersBtnsList.forEach(function(button){
         button.textContent = answers[answersIndex];
+        button.setAttribute("data-question-number", questionNumber);
         button.setAttribute("data-answer-index", answersIndex);
         button.addEventListener("click", function(event) {
             let button = event.target;
-           // console.log(button.getAttribute("data-answer-index"));
-            showResponse();
+            let questionObj = questionsList[button.getAttribute("data-question-number")];
+            showResponse(questionObj.isCorrectAnswer(button.getAttribute("data-answer-index")));
             ++questionNumber;
-            console.log(questionNumber);
             if (questionNumber < questions.length){
                 renderQuestion(questionNumber);
             }else{
@@ -83,7 +107,7 @@ function startQuiz(){
     //hide main presentation section
     mainPresentation.style.display = "none";
     //show question section
-    question.style.display = "block";
+    questionEl.style.display = "block";
     renderQuestion(0);
     startTimer();
 };
@@ -92,7 +116,7 @@ function renderPresentation(){
     //show main presentation section
     mainPresentation.style.display = "block";
     //hide question section
-    question.style.display = "none";
+    questionEl.style.display = "none";
     //hide final score section
     finalScore.style.display ="none";
     timerCount = quizDuration;
@@ -101,7 +125,7 @@ function renderPresentation(){
 
 function renderFinalScore(){
     //hide question section
-    question.style.display = "none";
+    questionEl.style.display = "none";
     //show final score
     finalScore.style.display ="block";
 }
@@ -168,6 +192,10 @@ function init(){
     //Check the pathname to know where the user is in
     if (location.pathname == '/index.html'){
         renderPresentation();
+        if (questionsList.length ==0){
+            fillQuestionsList();
+            console.log(questionsList);
+        }
     } else {
         // (location.pathname == '/highscores.html')
         renderHighscores();
