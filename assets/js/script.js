@@ -14,7 +14,8 @@ const possibleAnswers =[["strings","booleans","alerts","numbers"],
 
 const correctAnswers =["alerts","parentheses","all of the above"];
 // 5 minutes is the duration of the quiz: 10x60milliseconds = 600
-const quizDuration = 300; 
+const quizDuration = 100;
+const penalizationCost =10;
 
 var timerCount;
 var timer;
@@ -68,6 +69,8 @@ function showResponse(correct){
         response.textContent ="Correct";
     }else{
         response.textContent ="Wrong";
+        //Dicount time for a wrong answer
+        timerCount -= penalizationCost;
     } 
 }
 
@@ -75,7 +78,6 @@ function renderQuestion(questionNumber){
     const questionTitle = document.querySelector("#question-title");
     // Display the question on the page
     let currentQuestion = questionsList[questionNumber];
-    console.log(currentQuestion);
     questionTitle.textContent = currentQuestion.questionText;
     // Get the possible answers for the question
     let answers = currentQuestion.answerChoices;
