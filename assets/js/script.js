@@ -16,7 +16,6 @@ const correctAnswers =[3,2,3];
 // 5 minutes is the duration of the quiz: 10x60milliseconds = 600
 const quizDuration = 300; 
 
-var questionNumber;
 var timerCount;
 var timer;
 
@@ -50,7 +49,7 @@ function showResponse(){
     response.textContent ="Correct";
 }
 
-function renderQuestion(){
+function renderQuestion(questionNumber){
     const questionTitle = document.querySelector("#question-title");
     // Display the question on the page
     questionTitle.textContent = questions[questionNumber];
@@ -64,15 +63,15 @@ function renderQuestion(){
         button.setAttribute("data-answer-index", answersIndex);
         button.addEventListener("click", function(event) {
             let button = event.target;
-            console.log(button.getAttribute("data-answer-index"));
+           // console.log(button.getAttribute("data-answer-index"));
             showResponse();
-            questionNumber++;
+            ++questionNumber;
+            console.log(questionNumber);
             if (questionNumber < questions.length){
-                renderQuestion();
+                renderQuestion(questionNumber);
             }else{
-                console.log(questionNumber);
-                showFinalScore();
                 stopTimer();
+                showFinalScore();
             }
         });
         ++answersIndex;
@@ -85,8 +84,7 @@ function startQuiz(){
     mainPresentation.style.display = "none";
     //show question section
     question.style.display = "block";
-    questionNumber = 0;
-    renderQuestion();
+    renderQuestion(0);
     startTimer();
 };
 
