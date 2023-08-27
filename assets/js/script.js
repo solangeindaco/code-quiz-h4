@@ -1,4 +1,5 @@
 // Access element by ID using .querySelector()
+const timerEl = document.querySelector("#timer");
 const mainPresentation = document.querySelector("#main-presentation");
 const question = document.querySelector("#question");
 const startQuizBtn = document.querySelector("#start-quiz");
@@ -12,8 +13,12 @@ const possibleAnswers =[["strings","booleans","alerts","numbers"],
                 ["number and string","others arrays","booleans","all of the above"]];
 
 const correctAnswers =[3,2,3];
+// 10 minutes is the duration of the quiz: 10x60milliseconds = 600
+const quizDuration = 600; 
 
 var questionNumber;
+var timerCount;
+var timer;
 
 
 function saveInitials(){
@@ -72,25 +77,6 @@ function renderQuestion(questionNumber){
         ++answersIndex;
     });
 
-    /*
-    let answers = possibleAnswers[questionNumber];
-    let possibleAnswersList = question.getElementsByTagName("ul");
-    todoList.innerHTML = "";
-    todoCountSpan.textContent = todos.length;
-  
-    for (var i = 0; i < questions.length; i++) {
-        var todo = todos[i];
-
-        var li = document.createElement("li");
-        li.textContent = todo;
-        li.setAttribute("data-index", i);
-
-        var button = document.createElement("button");
-        button.textContent = "Complete ✔️";
-
-        li.appendChild(button);
-        todoList.appendChild(li);
-    }*/
 }
 
 function startQuiz(){
@@ -99,8 +85,9 @@ function startQuiz(){
     //show question section
     question.style.display = "block";
     questionNumber = 0;
+    timerCount = quizDuration;
     renderQuestion(questionNumber);
-    
+    startTimer();
 };
 
 function renderPresentation(){
@@ -110,6 +97,8 @@ function renderPresentation(){
     question.style.display = "none";
     //hide final score section
     finalScore.style.display ="none";
+    timer = 0;
+    timerEl
 }
 
 function renderFinalScore(){
@@ -126,9 +115,10 @@ function renderHighscores() {
     // Check if data is returned, if not exit out of the function
     if (highscoresList !== null) {
       var scoresListEl = document.querySelector("#highscores");
+      let scoreNumber = 0;
       highscoresList.forEach(scoreElement =>  {
         let scoreRow = document.createElement('li');
-        scoreRow.textContent = scoreElement.score;
+        scoreRow.textContent = `${++scoreNumber} . ${scoreElement.initials}-${scoreElement.score}`;
         scoresListEl.appendChild(scoreRow);
       });
     }
@@ -146,32 +136,35 @@ function goToMainPage(){
     location.href = "./index.html";
 }
 
-function saveScore() {
-    // Save related form data as an object
-    /*
-    let playerScore = {
-      initials: .value,
-      score: grade.value,
-    };
-    // Use .setItem() to store object in storage and JSON.stringify to convert it as a string
-    localStorage.setItem('playerScore', JSON.stringify(playerScore));
-    */
-  }
-  
-  /*
-  saveButton.addEventListener('click', function (event) {
-    event.preventDefault();
-    saveLastGrade();
-    renderLastGrade();
-  });
-  */
-
 //This function is called when user click on the "clear Highscores" button on the highscores page
 function clearHighscores(){
     localStorage.removeItem('highscores');
     var scoresListEl = document.querySelector("#highscores");
     scoresListEl.innerHTML="";
 }
+
+// The setTimer function starts and stops the timer and triggers winGame() and loseGame()
+function startTimer() {
+    // Sets timer
+    timer = setInterval(function() {
+      timerCount--;
+      timerEl.textContent = timerCount;
+      if (timerCount >= 0) {
+        // Tests if win condition is met
+        if (quizFinnished() && timerCount > 0) {
+          // Clears interval and stops timer
+          clearInterval(timer);
+          winGame();
+        }
+      }
+      // Tests if time has run out
+      if (timerCount === 0) {
+        // Clears interval
+        clearInterval(timer);
+        renderFinalScore();
+      }
+    }, 1000);
+  }
 
 function init(){
     //Check the pathname to know where the user is in

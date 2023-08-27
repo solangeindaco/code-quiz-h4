@@ -20,7 +20,8 @@ The following image shows the web application's appearance and functionality:
 
 ## Credits
 
-To implement this website, I used the following tutorials:     
+To implement this website, I used the following tutorials:        
+    - setInterval method: https://developer.mozilla.org/en-US/docs/Web/API/setInterval   
     - Eric Meyer CSS Reset file: https://meyerweb.com/eric/tools/css/reset/   
 
 ## License
