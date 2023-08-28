@@ -76,7 +76,12 @@ function showResponse(correct){
     }else{
         response.textContent ="Wrong";
         //Discount time for a wrong answer
-        timerCount -= penalizationCost;
+        if (timerCount > penalizationCost){
+            timerCount -= penalizationCost;
+        }else {
+            timerCount = 0;
+        }
+        timerEl.textContent = timerCount;
     } 
 }
 
@@ -150,6 +155,7 @@ function renderHighscores() {
       let scoreNumber = 0;
       highscoresList.forEach(scoreElement =>  {
         let scoreRow = document.createElement('li');
+        scoreRow.setAttribute("class","highscores-item");
         scoreRow.textContent = `${++scoreNumber}. ${scoreElement.initials}-${scoreElement.score}`;
         scoresListEl.appendChild(scoreRow);
       });

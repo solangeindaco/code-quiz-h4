@@ -43,9 +43,13 @@ header {
 
 .result-section{
   border-top: 5px;
-  border-color: lightgray;
+  border-color: rgb(154, 152, 152);
   font-style: italic;
-  color:lightgrey;
+  color:rgb(153, 151, 151);
   padding: 2em;
+}
+
+.highscores-item{
+  background-color: rgba(174, 131, 174, 0.475);
 }
 
