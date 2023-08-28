@@ -8,12 +8,16 @@ const possibleAnswersList = document.querySelector("#possible-answers");
 const finalScore = document.querySelector("#final-score");
 const questions = ["Commonly used data types DO NOT include: ", 
                    "The condition enclosed in a if/else statement is enclosed within ____.",
-                    "Arrays in Javascript can be used to store "];
+                   "Arrays in Javascript can be used to store.",
+                   "String values must be enclosed within ____ when being assigned to variables.",
+                   "A very useful tool used during development and debugging for printing content to the debugger is:"];
 const possibleAnswers =[["strings","booleans","alerts","numbers"],
                 ["quotes","curly brackets","parentheses","square brackets"],
-                ["number and string","others arrays","booleans","all of the above"]];
+                ["number and string","others arrays","booleans","all of the above"],
+                ["commas","curly brackets","quotes","parentheses"],
+                ["JavaScript","terminal/bash","for loops","console.log"]];
 
-const correctAnswers =["alerts","parentheses","all of the above"];
+const correctAnswers =["alerts","parentheses","all of the above","quotes","console.log"];
 // 5 minutes is the duration of the quiz: 10x60milliseconds = 600
 const quizDuration = 100;
 const penalizationCost =10;
@@ -28,8 +32,8 @@ class Question {
         this.answerChoices = answerChoices;
         this.correctAnswer = correctAnswer;
     }
-    isCorrectAnswer(answerIndex) {
-        return this.correctAnswer == this.answerChoices[answerIndex];
+    isAnswerCorrect(answer) {
+        return this.correctAnswer == answer;
     }
 }
 
@@ -73,6 +77,7 @@ function showResponse(correct){
     } 
 }
 
+// delete the result when the user mouseover the initials input box
 function cleanResponse(){
     response.innerHTML="";
 }
@@ -90,11 +95,12 @@ function renderQuestion(questionNumber){
     answersBtnsList.forEach(function(button){
         button.textContent = answers[answersIndex];
         button.setAttribute("data-question-number", questionNumber);
-        button.setAttribute("data-answer-index", answersIndex);
+        button.setAttribute("data-answer", answers[answersIndex]);
         button.addEventListener("click", function(event) {
-            let button = event.target;
-            let questionObj = questionsList[button.getAttribute("data-question-number")];
-            showResponse(questionObj.isCorrectAnswer(button.getAttribute("data-answer-index")));
+            const buttonOption = event.target;
+            let questionObj = questionsList[buttonOption.getAttribute("data-question-number")];
+            showResponse(questionObj.isAnswerCorrect(buttonOption.getAttribute("data-answer")));
+            console.log(buttonOption.getAttribute("data-answer"));
             ++questionNumber;
             if (questionNumber < questions.length){
                 renderQuestion(questionNumber);
