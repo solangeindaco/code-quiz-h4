@@ -22,6 +22,7 @@ const correctAnswers =["alerts","parentheses","all of the above","quotes","conso
 const quizDuration = 100;
 const penalizationCost =10;
 
+var questionNumber;
 var timerCount;
 var timer;
 var questionsList = [];
@@ -82,7 +83,29 @@ function cleanResponse(){
     response.innerHTML="";
 }
 
-function renderQuestion(questionNumber){
+function createAButtonOption(answerOption){
+    let answerRow = document.createElement('li');
+    let answerButton = document.createElement('button');
+    answerButton.textContent = answerOption;
+    answerButton.setAttribute("data-question-number", questionNumber);
+    answerButton.setAttribute("data-answer", answerOption);
+    answerButton.addEventListener("click", function(event) {
+            const buttonOption = event.target;
+            let questionObj = questionsList[buttonOption.getAttribute("data-question-number")];
+            showResponse(questionObj.isAnswerCorrect(buttonOption.getAttribute("data-answer")));
+            ++questionNumber;
+            if (questionNumber < questions.length){
+                renderQuestion();
+            }else{
+                stopTimer();
+                showFinalScore();
+            }
+        });
+    answerRow.appendChild(answerButton);
+    possibleAnswersList.appendChild(answerRow);
+}
+
+function renderQuestion(){
     const questionTitle = document.querySelector("#question-title");
     // Display the question on the page
     let currentQuestion = questionsList[questionNumber];
@@ -90,28 +113,9 @@ function renderQuestion(questionNumber){
     // Get the possible answers for the question
     let answers = currentQuestion.answerChoices;
     let answersBtnsList = document.querySelectorAll(".answers");
-
-    let answersIndex = 0;
-    answersBtnsList.forEach(function(button){
-        button.textContent = answers[answersIndex];
-        button.setAttribute("data-question-number", questionNumber);
-        button.setAttribute("data-answer", answers[answersIndex]);
-        button.addEventListener("click", function(event) {
-            const buttonOption = event.target;
-            let questionObj = questionsList[buttonOption.getAttribute("data-question-number")];
-            showResponse(questionObj.isAnswerCorrect(buttonOption.getAttribute("data-answer")));
-            console.log(buttonOption.getAttribute("data-answer"));
-            ++questionNumber;
-            if (questionNumber < questions.length){
-                renderQuestion(questionNumber);
-            }else{
-                stopTimer();
-                showFinalScore();
-            }
-        });
-        ++answersIndex;
-    });
-
+    //Delete answer options for the previous question
+    possibleAnswersList.innerHTML="";
+    answers.forEach( answerOption => createAButtonOption(answerOption));
 }
 
 function startQuiz(){
@@ -119,7 +123,8 @@ function startQuiz(){
     mainPresentation.style.display = "none";
     //show question section
     questionEl.style.display = "block";
-    renderQuestion(0);
+    questionNumber = 0;
+    renderQuestion();
     startTimer();
 };
 

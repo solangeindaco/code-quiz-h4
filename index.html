@@ -29,10 +29,6 @@
       <section id="question">
         <h2 id="question-title"></h2>
         <ul id="possible-answers">
-          <li><button class="answers"></button></li>
-          <li><button class="answers"></button></li>
-          <li><button class="answers"></button></li>
-          <li><button class="answers"></button></li>
         </ul>
       </section>
 
@@ -40,7 +36,7 @@
         <h2>All done!</h2>
         <p>Your final score is <span id="score"></span>.</p>
         <p>Enter initials: </p>
-        <input type="text" id="initials" onmouseover="cleanResponse()"/>
+        <input type="text" id="initials" onmousedown="cleanResponse()"/>
         <button id="submit" onclick="saveInitials()">Submit</button>
       </section>
 
