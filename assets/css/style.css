@@ -31,7 +31,7 @@ header {
   justify-content: center;
   flex-direction: column;
   flex-wrap: wrap;
-  text-align: center;
+  align-items: center;
 }
 
 .purple-btn{
@@ -39,5 +39,13 @@ header {
   color:white;
   border-color: mediumpurple;
   background-color: mediumpurple;
+}
+
+.result-section{
+  border-top: 5px;
+  border-color: lightgray;
+  font-style: italic;
+  color:lightgrey;
+  padding: 2em;
 }
 

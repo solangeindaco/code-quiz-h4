@@ -6,7 +6,7 @@ const response= document.querySelector("#response");
 const startQuizBtn = document.querySelector("#start-quiz");
 const possibleAnswersList = document.querySelector("#possible-answers");
 const finalScore = document.querySelector("#final-score");
-const score = document.querySelector("#score");
+var score = document.querySelector("#score");
 const questions = ["Commonly used data types DO NOT include: ", 
                    "The condition enclosed in a if/else statement is enclosed within ____.",
                    "Arrays in Javascript can be used to store.",
@@ -66,6 +66,7 @@ function showFinalScore(){
     questionEl.style.display = "none";
     //show final score section
     finalScore.style.display = "block";
+    score.textContent= timerCount;
 }
 
 function showResponse(correct){
@@ -140,16 +141,6 @@ function renderPresentation(){
     timerEl.textContent = timerCount;
 }
 
-function renderFinalScore(){
-    //hide question section
-    questionEl.style.display = "none";
-    //show final score
-    finalScore.style.display ="block";
-    score.textContent= timerCount;
-    console.log(score.textContent);
-}
-
-
 function renderHighscores() {
     // Use JSON.parse() to convert text to JavaScript object
     var highscoresList = JSON.parse(localStorage.getItem('highscores'));
@@ -159,7 +150,7 @@ function renderHighscores() {
       let scoreNumber = 0;
       highscoresList.forEach(scoreElement =>  {
         let scoreRow = document.createElement('li');
-        scoreRow.textContent = `${++scoreNumber} . ${scoreElement.initials}-${scoreElement.score}`;
+        scoreRow.textContent = `${++scoreNumber}. ${scoreElement.initials}-${scoreElement.score}`;
         scoresListEl.appendChild(scoreRow);
       });
     }
