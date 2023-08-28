@@ -2,6 +2,7 @@
 const timerEl = document.querySelector("#timer");
 const mainPresentation = document.querySelector("#main-presentation");
 const questionEl = document.querySelector("#question");
+const response= document.querySelector("#response");
 const startQuizBtn = document.querySelector("#start-quiz");
 const possibleAnswersList = document.querySelector("#possible-answers");
 const finalScore = document.querySelector("#final-score");
@@ -59,19 +60,21 @@ function showFinalScore(){
     questionEl.style.display = "none";
     //show final score section
     finalScore.style.display = "block";
-    
 }
 
 function showResponse(correct){
-    const response= document.querySelector("#response");
     response.innerHTML="";
     if (correct){
         response.textContent ="Correct";
     }else{
         response.textContent ="Wrong";
-        //Dicount time for a wrong answer
+        //Discount time for a wrong answer
         timerCount -= penalizationCost;
     } 
+}
+
+function cleanResponse(){
+    response.innerHTML="";
 }
 
 function renderQuestion(questionNumber){

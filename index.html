@@ -34,16 +34,17 @@
           <li><button class="answers"></button></li>
           <li><button class="answers"></button></li>
         </ul>
-        <h3 id="response"></h3>
       </section>
 
       <section id="final-score">
         <h2>All done!</h2>
         <p>Your final score is <span id="score"></span>.</p>
         <p>Enter initials: </p>
-        <input type="text" id="initials"/>
+        <input type="text" id="initials" onmouseover="cleanResponse()"/>
         <button id="submit" onclick="saveInitials()">Submit</button>
       </section>
+
+      <section><h3 id="response"></h3></section>
 
     </main>
     <script src="./assets/js/script.js"></script>
