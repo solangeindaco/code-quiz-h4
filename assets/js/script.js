@@ -6,6 +6,7 @@ const response= document.querySelector("#response");
 const startQuizBtn = document.querySelector("#start-quiz");
 const possibleAnswersList = document.querySelector("#possible-answers");
 const finalScore = document.querySelector("#final-score");
+const score = document.querySelector("#score");
 const questions = ["Commonly used data types DO NOT include: ", 
                    "The condition enclosed in a if/else statement is enclosed within ____.",
                    "Arrays in Javascript can be used to store.",
@@ -83,12 +84,13 @@ function cleanResponse(){
     response.innerHTML="";
 }
 
-function createAButtonOption(answerOption){
+function createButtonOption(answerOption, index){
     let answerRow = document.createElement('li');
     let answerButton = document.createElement('button');
-    answerButton.textContent = answerOption;
+    answerButton.textContent = `${index + 1}. ${answerOption}`;
     answerButton.setAttribute("data-question-number", questionNumber);
     answerButton.setAttribute("data-answer", answerOption);
+    answerButton.setAttribute("class","purple-btn");
     answerButton.addEventListener("click", function(event) {
             const buttonOption = event.target;
             let questionObj = questionsList[buttonOption.getAttribute("data-question-number")];
@@ -112,10 +114,9 @@ function renderQuestion(){
     questionTitle.textContent = currentQuestion.questionText;
     // Get the possible answers for the question
     let answers = currentQuestion.answerChoices;
-    let answersBtnsList = document.querySelectorAll(".answers");
     //Delete answer options for the previous question
     possibleAnswersList.innerHTML="";
-    answers.forEach( answerOption => createAButtonOption(answerOption));
+    answers.forEach( (answerOption, index) => createButtonOption(answerOption, index));
 }
 
 function startQuiz(){
@@ -144,6 +145,8 @@ function renderFinalScore(){
     questionEl.style.display = "none";
     //show final score
     finalScore.style.display ="block";
+    score.textContent= timerCount;
+    console.log(score.textContent);
 }
 
 

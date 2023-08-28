@@ -14,7 +14,7 @@
       <a href="./highscores.html">View Highscores</a>
       <p>Time: <span id="timer">0</span></p>
     </header>
-    <main>
+    <main class="center-content">
 
       <section id="main-presentation">
         <h1>Coding Quiz Challenge</h1>
@@ -23,7 +23,7 @@
           limit. Keep in mind that incorrect answer will penalize your scoretime 
           by ten seconds
         </p>
-        <button id="start-quiz" onclick="startQuiz()">Start Quiz</button>
+        <button id="start-quiz" class="purple-btn" onclick="startQuiz()">Start Quiz</button>
       </section>
 
       <section id="question">
@@ -37,7 +37,7 @@
         <p>Your final score is <span id="score"></span>.</p>
         <p>Enter initials: </p>
         <input type="text" id="initials" onmousedown="cleanResponse()"/>
-        <button id="submit" onclick="saveInitials()">Submit</button>
+        <button id="submit" class="purple-btn" onclick="saveInitials()">Submit</button>
       </section>
 
       <section><h3 id="response"></h3></section>

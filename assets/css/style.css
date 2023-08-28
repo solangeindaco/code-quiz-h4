@@ -1,3 +1,24 @@
+* {
+  box-sizing: border-box;
+}
+
+body {
+  font-family: Arial;
+  margin: 0;
+}
+
+h1 {
+  display: block;
+  font-size: 2em;
+  font-weight: bold;
+}
+
+h2 {
+  display: block;
+  font-size: 1.5em;
+  font-weight: bold;
+}
+
 header {
   display: flex;
   justify-content: space-between;
@@ -5,4 +26,18 @@ header {
   padding: 1%;
 }
 
+.center-content{
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  flex-wrap: wrap;
+  text-align: center;
+}
+
+.purple-btn{
+  border-radius: 5px;
+  color:white;
+  border-color: mediumpurple;
+  background-color: mediumpurple;
+}
 
