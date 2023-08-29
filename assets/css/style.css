@@ -56,11 +56,24 @@ main{
   margin: 1em;
 }
 
+#highscore-content{
+  width: 30%;
+  flex-wrap: wrap;
+  justify-content: left;
+  align-items: left;
+  text-align: left;
+}
+
 #possible-answers{
   padding-top: 1.5em;
 }
 
+#highscores{
+  margin: 1em;
+}
+
 .highscores-item{
+  margin: 0.2em;
   background-color: rgba(174, 131, 174, 0.475);
 }
 
