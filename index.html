@@ -16,7 +16,7 @@
     </header>
     <main class="center-content">
 
-      <section id="main-presentation">
+      <section id="main-presentation" class="main-content">
         <h1>Coding Quiz Challenge</h1>
         <p>
           Try answer the following code-related questions within the time 
@@ -26,21 +26,23 @@
         <button id="start-quiz" class="purple-btn" onclick="startQuiz()">Start Quiz</button>
       </section>
 
-      <section id="question">
+      <section id="question" class="main-content">
         <h2 id="question-title"></h2>
         <ul id="possible-answers">
         </ul>
       </section>
 
-      <section id="final-score">
+      <section id="final-score" class="main-content">
         <h2>All done!</h2>
         <p>Your final score is <span id="score"></span>.</p>
-        <p>Enter initials: </p>
-        <input type="text" id="initials" onmousedown="cleanResponse()"/>
-        <button id="submit" class="purple-btn" onclick="saveInitials()">Submit</button>
+        <form>
+          <p>Enter initials: </p>
+          <input type="text" id="initials" onmousedown="cleanResponse()"/>
+          <button id="submit" class="purple-btn" onclick="saveInitials()">Submit</button>
+        </form>
       </section>
 
-      <section class="result-section">
+      <section class="result-section main-content">
         <h3 id="response"></h3>
       </section>
 

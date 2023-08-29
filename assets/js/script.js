@@ -6,6 +6,7 @@ const response= document.querySelector("#response");
 const startQuizBtn = document.querySelector("#start-quiz");
 const possibleAnswersList = document.querySelector("#possible-answers");
 const finalScore = document.querySelector("#final-score");
+const submitEl = document.querySelector("#submit");
 var score = document.querySelector("#score");
 const questions = ["Commonly used data types DO NOT include: ", 
                    "The condition enclosed in a if/else statement is enclosed within ____.",
@@ -45,7 +46,8 @@ function fillQuestionsList(){
     }
 }
 
-function saveInitials(){
+function saveInitials(event){
+    event.preventDefault();
     let initialsInput = document.querySelector("#initials"); 
     let initialText = initialsInput.value.trim();
     var newScore = {
@@ -67,6 +69,7 @@ function showFinalScore(){
     //show final score section
     finalScore.style.display = "block";
     score.textContent= timerCount;
+    submitEl.addEventListener("click",saveInitials);
 }
 
 function showResponse(correct){
