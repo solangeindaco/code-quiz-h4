@@ -69,3 +69,8 @@ main{
   background-color: rgba(174, 131, 174, 0.475);
 }
 
+/* The user's cursor is positioned over the element */
+button:hover {
+  background-color: rgba(67, 49, 159, 0.47);
+}
+

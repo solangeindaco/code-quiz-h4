@@ -25,7 +25,7 @@ const possibleAnswers =[["strings","booleans","alerts","numbers"],
 
 const correctAnswers =["alerts","parentheses","all of the above","quotes","console.log"];
 // 5 minutes is the duration of the quiz: 10x60milliseconds = 600
-const quizDuration = 100;
+const quizDuration = 5;
 const penalizationCost =10;
 
 var questionNumber;
@@ -81,6 +81,9 @@ function showFinalScore(){
     questionEl.style.display = "none";
     //show final score section
     finalScore.style.display = "block";
+    if (timerCount<0){
+        timerCount = 0;   
+    }
     score.textContent= timerCount;
     submitEl.addEventListener("click",saveInitials);
 }
@@ -226,12 +229,13 @@ function stopTimer(){
 function startTimer() {
     // Sets timer
     timer = setInterval(function() {
-      timerCount--;
-      timerEl.textContent = timerCount;
       // Tests if time has run out
-      if (timerCount === 0){ 
+      if (timerCount <= 0){ 
         stopTimer();
-        renderFinalScore();
+        showFinalScore();
+      }else{
+        timerCount--;
+        timerEl.textContent = timerCount;
       }
     }, 1000); // it dicount the timerCount every second
   }
