@@ -49,6 +49,11 @@ main{
   flex-wrap: wrap;
   justify-content: center;
   align-items: center;
+  text-align: center;
+}
+
+#main-presentation p{
+  margin: 1em;
 }
 
 #possible-answers{

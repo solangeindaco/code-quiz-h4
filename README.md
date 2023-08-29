@@ -3,7 +3,7 @@
 ## Description
 
 I deployed this repository to learn about Web API. I made this website from scratch. I implemented a timed coding quiz with multiple-choice questions.
-I learn:  
+I learn:     
     - How to use Window interface that represents a window containing a DOM document.   
     - How Select and dynamically generate HTML elements and content using Web API methods.  
     - How to store and retrieve data using the browser's local and session storage.  
@@ -24,10 +24,10 @@ The following image shows the web application's appearance and functionality:
 
 ## Credits
 
-To implement this website, I used the following tutorials: 
+To implement this website, I used the following tutorials:     
     - DOM : https://developer.mozilla.org/en-US/docs/Web/API/Document   
     - Window : https://developer.mozilla.org/en-US/docs/Web/API/Window   
-    - Javascript objects: https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Working_with_objects 
+    - Javascript objects: https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Working_with_objects    
     - Prevent default : https://developer.mozilla.org/en-US/docs/Web/API/Event/preventDefault            
     - setInterval method: https://developer.mozilla.org/en-US/docs/Web/API/setInterval   
     - JSON : https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/JSON  
