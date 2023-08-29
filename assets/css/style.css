@@ -12,6 +12,7 @@ h1 {
   font-size: 2em;
   font-weight: bold;
   padding: 2%;
+  text-align: center;
 }
 
 h2 {
@@ -50,9 +51,19 @@ main{
   align-items: center;
 }
 
-.purple-btn{
+#possible-answers{
+  padding-top: 1.5em;
+}
+
+.highscores-item{
+  background-color: rgba(174, 131, 174, 0.475);
+}
+
+button{
   border-radius: 5px;
   color:white;
+  font-size: 1em;
+  margin: 0.25em;
   border-color: mediumpurple;
   background-color: mediumpurple;
   border: none;
@@ -60,10 +71,9 @@ main{
   cursor: pointer;
 }
 
-button:active{
-  border: 1em;
-  outline: auto;
-  border-color: aqua;
+/* The user's cursor is positioned over the element */
+button:hover {
+  background-color: rgba(67, 49, 159, 0.47);
 }
 
 .result-section{
@@ -76,15 +86,5 @@ button:active{
   border-top: 0.2em;
   border-top-style: solid;
   border-color: rgb(192, 187, 187);
-}
-
-
-.highscores-item{
-  background-color: rgba(174, 131, 174, 0.475);
-}
-
-/* The user's cursor is positioned over the element */
-button:hover {
-  background-color: rgba(67, 49, 159, 0.47);
 }
 
