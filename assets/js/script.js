@@ -24,8 +24,8 @@ const possibleAnswers =[["strings","booleans","alerts","numbers"],
                 ["JavaScript","terminal/bash","for loops","console.log"]];
 
 const correctAnswers =["alerts","parentheses","all of the above","quotes","console.log"];
-// 5 minutes is the duration of the quiz: 10x60milliseconds = 600
-const quizDuration = 5;
+// 2 minutes is the duration of the quiz: 1x60milliseconds = 120
+const quizDuration = 120;
 const penalizationCost =10;
 
 var questionNumber;
@@ -91,7 +91,11 @@ function showFinalScore(){
 //Show the user wheather his/her response was correct or not
 //If it is wrong the time will be discounted the penalizationCost that is 10 seconds
 function showResponse(correct){
+    //Show response section heading
+    response.style.display = "block";
     response.innerHTML="";
+    //Show response section
+    
     if (correct){
         response.textContent ="Correct";
     }else{
@@ -109,6 +113,7 @@ function showResponse(correct){
 // delete the result when the user mouseover the initials input box
 function cleanResponse(){
     response.innerHTML="";
+    response.style.display = "none";
 }
 
 // Creates a list item with a button to show the possible answer to the user
@@ -161,6 +166,8 @@ function startQuiz(){
     mainPresentation.style.display = "none";
     //show question section
     questionEl.style.display = "block";
+    //Hide response section heading
+    response.style.display = "none";
     questionNumber = 0;
     // Render the first question
     renderQuestion();
@@ -177,10 +184,13 @@ function renderPresentation(){
     questionEl.style.display = "none";
     //hide final score section
     finalScore.style.display ="none";
+    //hide question section
+    response.style.display = "none";
     //Init the timer using the constant quizDuration
     timerCount = quizDuration;
     timerEl.textContent = timerCount;
 }
+
 //It render the highscores dinamically to the user if there is any
 function renderHighscores() {
     // Use JSON.parse() to convert text to JavaScript object

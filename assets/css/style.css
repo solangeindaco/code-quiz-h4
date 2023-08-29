@@ -55,15 +55,29 @@ main{
   color:white;
   border-color: mediumpurple;
   background-color: mediumpurple;
+  border: none;
+  outline: none;
+  cursor: pointer;
+}
+
+button:active{
+  border: 1em;
+  outline: auto;
+  border-color: aqua;
 }
 
 .result-section{
-  border-top: 5px;
-  border-color: rgb(154, 152, 152);
-  font-style: italic;
-  color:rgb(153, 151, 151);
   padding: 2em;
 }
+
+#response{
+  font-style: italic;
+  color:rgb(153, 151, 151);
+  border-top: 0.2em;
+  border-top-style: solid;
+  border-color: rgb(192, 187, 187);
+}
+
 
 .highscores-item{
   background-color: rgba(174, 131, 174, 0.475);
