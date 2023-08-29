@@ -23,6 +23,7 @@ The following image shows the web application's appearance and functionality:
 To implement this website, I used the following tutorials: 
     - Javascript objects: https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Working_with_objects          
     - setInterval method: https://developer.mozilla.org/en-US/docs/Web/API/setInterval   
+    - JSON : https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/JSON/parse   
     - Eric Meyer CSS Reset file: https://meyerweb.com/eric/tools/css/reset/   
 
 ## License
