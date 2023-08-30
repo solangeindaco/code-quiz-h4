@@ -1,4 +1,5 @@
 // Access element by ID using .querySelector()
+var onIndex = true;
 const timerEl = document.querySelector("#timer");
 const mainPresentation = document.querySelector("#main-presentation");
 const questionEl = document.querySelector("#question");
@@ -124,23 +125,6 @@ function createButtonOption(answerOption, index){
     answerButton.setAttribute("data-question-number", questionNumber);
     answerButton.setAttribute("data-answer", answerOption);
     answerButton.setAttribute("class","purple-btn");
-    
-    /** 
-    answerButton.addEventListener("click", function(event) {
-            const buttonOption = event.target;
-            let questionObj = questionsList[buttonOption.getAttribute("data-question-number")];
-            showResponse(questionObj.isAnswerCorrect(buttonOption.getAttribute("data-answer")));
-            ++questionNumber;
-            if (questionNumber < questions.length){
-                renderQuestion();
-            }else{// the user answer the last question
-                // the timer will stop
-                stopTimer();
-                // it will show the user his/her final score
-                showFinalScore();
-            }
-        });
-    **/
     answerRow.appendChild(answerButton);
     possibleAnswersList.appendChild(answerRow);
 }
@@ -252,7 +236,7 @@ function startTimer() {
 
 function init(){
     //Check the pathname to know where the user is in
-    if (location.pathname == '/index.html'){
+    if (mainPresentation != undefined){
         renderPresentation();
         //If the list of questions if empty, it will fill it que the static questions in "questions" 
         // declared at the begining of the file. 
@@ -262,22 +246,21 @@ function init(){
     //Add a event listener to the list of answers that call a function that show if the answer is correct o not
     //Then it send the user to the following question if there is any or 
     //Stop the timer and send the user to save his/her initials 
-    possibleAnswersList.addEventListener("click", function (event){
-        const answerButtonClicked = event.target;
-        let questionObj = questionsList[answerButtonClicked.getAttribute("data-question-number")];
-        showResponse(questionObj.isAnswerCorrect(answerButtonClicked.getAttribute("data-answer")));
-        ++questionNumber;
-        if (questionNumber < questions.length){
-            renderQuestion();
-        }else{// the user answer the last question
-            // the timer will stop
-            stopTimer();
-            // it will show the user his/her final score
-            showFinalScore();
-        }
-    });
-    } else {
-        // (location.pathname == '/highscores.html')
+        possibleAnswersList.addEventListener("click", function (event){
+            const answerButtonClicked = event.target;
+            let questionObj = questionsList[answerButtonClicked.getAttribute("data-question-number")];
+            showResponse(questionObj.isAnswerCorrect(answerButtonClicked.getAttribute("data-answer")));
+            ++questionNumber;
+            if (questionNumber < questions.length){
+                renderQuestion();
+            }else{// the user answer the last question
+                // the timer will stop
+                stopTimer();
+                // it will show the user his/her final score
+                showFinalScore();
+            }
+        });
+    } else {// (location == '/highscores.html')
         renderHighscores();
     }
 }
