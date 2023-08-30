@@ -64,6 +64,10 @@ main{
   text-align: left;
 }
 
+#highscore-content h1{
+  text-align: left;
+}
+
 #possible-answers{
   padding-top: 1.5em;
 }
