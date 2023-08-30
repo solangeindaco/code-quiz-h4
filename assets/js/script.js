@@ -237,6 +237,7 @@ function startTimer() {
 
 function init(){
     //Check the pathname to know where the user is in
+    console.log(location.pathname);
     if (location.pathname == '/index.html'){
         renderPresentation();
         //If the list of questions if empty, it will fill it que the static questions in "questions" 
