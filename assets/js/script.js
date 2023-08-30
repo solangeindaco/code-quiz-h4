@@ -1,5 +1,4 @@
 // Access element by ID using .querySelector()
-var onIndex = true;
 const timerEl = document.querySelector("#timer");
 const mainPresentation = document.querySelector("#main-presentation");
 const questionEl = document.querySelector("#question");
@@ -25,10 +24,11 @@ const possibleAnswers =[["strings","booleans","alerts","numbers"],
                 ["JavaScript","terminal/bash","for loops","console.log"]];
 
 const correctAnswers =["alerts","parentheses","all of the above","quotes","console.log"];
+
 // 2 minutes is the duration of the quiz: 1x60milliseconds = 120
 const quizDuration = 120;
 const penalizationCost =10;
-
+var onIndex;
 var questionNumber;
 var timerCount;
 var timer;
@@ -197,14 +197,15 @@ function renderHighscores() {
 //This function is called when the user save his/her initials
 function goToHighscoresPage(){
     // The location.href is change to navigate to the index page
-    onIndex = false;
     location.href = "./highscores.html";
+    onIndex = false;
 }
 
 //This function is called when user click on the "goBack" button on the highscores page
 function goToMainPage(){
     // The location.href is change to navigate to the index page
     location.href = "./index.html";
+    onIndex = true;
 }
 
 //This function is called when user click on the "clear Highscores" button on the highscores page
@@ -237,8 +238,7 @@ function startTimer() {
 
 function init(){
     //Check the pathname to know where the user is in
-    console.log(location.pathname);
-    if (location.pathname == '/index.html'){
+    if ((location.pathname== '/') || (location.pathname== '/index.html')){
         renderPresentation();
         //If the list of questions if empty, it will fill it que the static questions in "questions" 
         // declared at the begining of the file. 
