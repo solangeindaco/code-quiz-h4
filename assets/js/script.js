@@ -28,7 +28,6 @@ const correctAnswers =["alerts","parentheses","all of the above","quotes","conso
 // 2 minutes is the duration of the quiz: 1x60milliseconds = 120
 const quizDuration = 120;
 const penalizationCost =10;
-var onIndex;
 var questionNumber;
 var timerCount;
 var timer;
@@ -198,14 +197,12 @@ function renderHighscores() {
 function goToHighscoresPage(){
     // The location.href is change to navigate to the index page
     location.href = "./highscores.html";
-    onIndex = false;
 }
 
 //This function is called when user click on the "goBack" button on the highscores page
 function goToMainPage(){
     // The location.href is change to navigate to the index page
     location.href = "./index.html";
-    onIndex = true;
 }
 
 //This function is called when user click on the "clear Highscores" button on the highscores page
@@ -237,6 +234,7 @@ function startTimer() {
   }
 
 function init(){
+    // (location == '/index.html')
     if (mainPresentation != undefined){
         renderPresentation();
         //If the list of questions if empty, it will fill it que the static questions in "questions" 
