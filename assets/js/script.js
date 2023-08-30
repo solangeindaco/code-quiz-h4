@@ -237,8 +237,7 @@ function startTimer() {
   }
 
 function init(){
-    //Check the pathname to know where the user is in
-    if ((location.pathname== '/') || (location.pathname== '/index.html')){
+    if (mainPresentation != undefined){
         renderPresentation();
         //If the list of questions if empty, it will fill it que the static questions in "questions" 
         // declared at the begining of the file. 
