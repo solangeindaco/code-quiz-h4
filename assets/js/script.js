@@ -197,6 +197,7 @@ function renderHighscores() {
 //This function is called when the user save his/her initials
 function goToHighscoresPage(){
     // The location.href is change to navigate to the index page
+    onIndex = false;
     location.href = "./highscores.html";
 }
 
@@ -236,7 +237,7 @@ function startTimer() {
 
 function init(){
     //Check the pathname to know where the user is in
-    if (mainPresentation != undefined){
+    if (location.pathname == '/index.html'){
         renderPresentation();
         //If the list of questions if empty, it will fill it que the static questions in "questions" 
         // declared at the begining of the file. 
