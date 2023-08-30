@@ -124,9 +124,8 @@ function createButtonOption(answerOption, index){
     answerButton.setAttribute("data-question-number", questionNumber);
     answerButton.setAttribute("data-answer", answerOption);
     answerButton.setAttribute("class","purple-btn");
-    //Add a event listener that call a function that show if the answer is correct o not
-    //Then it send the user to the following question if there is any or 
-    //Stop the timer and send the user to save his/her initials 
+    
+    /** 
     answerButton.addEventListener("click", function(event) {
             const buttonOption = event.target;
             let questionObj = questionsList[buttonOption.getAttribute("data-question-number")];
@@ -141,6 +140,7 @@ function createButtonOption(answerOption, index){
                 showFinalScore();
             }
         });
+    **/
     answerRow.appendChild(answerButton);
     possibleAnswersList.appendChild(answerRow);
 }
@@ -247,7 +247,7 @@ function startTimer() {
         timerCount--;
         timerEl.textContent = timerCount;
       }
-    }, 1000); // it dicount the timerCount every second
+    }, 1000); // it discount the timerCount every second
   }
 
 function init(){
@@ -259,10 +259,28 @@ function init(){
         if (questionsList.length ==0){
             fillQuestionsList();
         }
+    //Add a event listener to the list of answers that call a function that show if the answer is correct o not
+    //Then it send the user to the following question if there is any or 
+    //Stop the timer and send the user to save his/her initials 
+    possibleAnswersList.addEventListener("click", function (event){
+        const answerButtonClicked = event.target;
+        let questionObj = questionsList[answerButtonClicked.getAttribute("data-question-number")];
+        showResponse(questionObj.isAnswerCorrect(answerButtonClicked.getAttribute("data-answer")));
+        ++questionNumber;
+        if (questionNumber < questions.length){
+            renderQuestion();
+        }else{// the user answer the last question
+            // the timer will stop
+            stopTimer();
+            // it will show the user his/her final score
+            showFinalScore();
+        }
+    });
     } else {
         // (location.pathname == '/highscores.html')
         renderHighscores();
     }
 }
+
 //It called to show the main presentation of the quiz or the highscores
 init();

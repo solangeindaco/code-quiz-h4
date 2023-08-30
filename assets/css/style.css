@@ -82,16 +82,21 @@ button{
   color:white;
   font-size: 1em;
   margin: 0.25em;
+  border: 2px solid mediumpurple;
   border-color: mediumpurple;
   background-color: mediumpurple;
-  border: none;
-  outline: none;
   cursor: pointer;
 }
 
 /* The user's cursor is positioned over the element */
 button:hover {
   background-color: rgba(67, 49, 159, 0.47);
+}
+
+/* The element is currently in focus, either by tabbing to or clicking on it */
+button:focus {
+  outline: none;
+  border-color: #8ac4ff;
 }
 
 .result-section{
